@@ -1,56 +1,77 @@
-import Models.Product;
+import Models.Persona;
+import java.util.ArrayList;
 
 public class BusquedaBinaria {
 
-    public int findByName(Product[] products, String nombre){
+    public void mostrarEdades(ArrayList<Persona> personas, int bajo, int alto) {
 
-        // Definamos alto y bajo
+        for (int i = bajo; i <= alto; i++) {
+            System.out.print(personas.get(i).getEdad());
 
-        int alto = products.length -1;
+            if (i < alto) {
+                System.out.print(" | ");
+            }
+        }
+
+        System.out.println();
+    }
+
+    public int findByAge(ArrayList<Persona> personas, int edad) {
+
+        int alto = personas.size() - 1;
         int bajo = 0;
 
-        while(bajo <= alto){
+        while (bajo <= alto) {
 
-            // Definimos centro
-            int central = (bajo + alto)/2;
+            mostrarEdades(personas, bajo, alto);
 
-            if (products[central].getNombre().equals(nombre)){
+            int central = (bajo + alto) / 2;
+            int valorCentro = personas.get(central).getEdad();
+
+            System.out.print("bajo=" + bajo);
+            System.out.print("\talto=" + alto);
+            System.out.print("\tcentro=" + central);
+            System.out.print("\tvalorCentro=" + valorCentro);
+
+            if (valorCentro == edad) {
+                System.out.println("\t--> ENCONTRADO");
                 return central;
             }
 
-            // Si voy a la der. o iz.
-
-            if (products[central].getNombre().compareTo(nombre) < 0){
+            if (valorCentro < edad) {
+                System.out.println("\t--> DERECHA");
                 bajo = central + 1;
             } else {
-                alto = central -1;
+                System.out.println("\t--> IZQUIERDA");
+                alto = central - 1;
             }
+
+            System.out.println();
         }
+
         return -1;
     }
 
-    public void sortByName(Product[] products){
+    public void sortByAge(ArrayList<Persona> personas) {
 
         boolean cambio;
 
-        for(int i = 0; i < products.length -1; i++){
+        for (int i = 0; i < personas.size() - 1; i++) {
             cambio = false;
-            for (int j = 0; j < products.length -1 -i; j++) {
-                if (products[j].getNombre().compareToIgnoreCase(products[j+1].getNombre()) > 0){
-                    Product aux = products[j];
-                    products[j] = products[j+1];
-                    products[j+1] = aux;
+            for (int j = 0; j < personas.size() - 1 - i; j++) {
+                if (personas.get(j).getEdad() > personas.get(j + 1).getEdad()) {
+                    Persona aux = personas.get(j);
+                    personas.set(j, personas.get(j + 1));
+                    personas.set(j + 1, aux);
                     cambio = true;
                 }
-                
+
             }
 
-            if(!cambio){
+            if (!cambio) {
                 break;
             }
-
         }
-            
     }
 
 }

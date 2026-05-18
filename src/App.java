@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Scanner entrada = new
-        ArrayList<Persona> personas = new ArrayList<>();        
-        int cantidad; 
+        Scanner entrada = new Scanner(System.in);
+        ArrayList<Persona> personas = new ArrayList<>();
+        int cantidad;
+        int edadBusca;
 
-        do{
+        do {
             System.out.println("Ingrese la cantidad de personas: ");
             cantidad = entrada.nextInt();
 
@@ -17,37 +18,49 @@ public class App {
                 System.out.println("La cantidad debe ser mayor a cero");
             }
 
-        }while(cantidad<=0);
+        } while (cantidad <= 0);
 
-        for(int i = 0; i < cantidad; i++){
-            System.out.println("Persona "+ (i + 1));
+        for (int i = 0; i < cantidad; i++) {
+            System.out.println("Persona " + (i + 1));
 
-            System.out.println("Ingrese el Nombre ");
+            System.out.println("Ingrese el nombre: ");
             String nombre = entrada.next();
 
-            System.out.println("Ingres la edad ");
-            int edad = entrada.nextInt();
+            int edad;
 
+            do {
+                System.out.println("Ingrese la edad: ");
+                edad = entrada.nextInt();
+
+                if (edad <= 0) {
+                    System.out.println("Edad debe ser mayor a 0");
+                }
+            } while (edad <= 0);
+
+            System.out.println("\nLista sin ordenar");
             Persona persona = new Persona(nombre, edad);
-
             personas.add(persona);
         }
 
 
+        BusquedaBinaria bBinaria = new BusquedaBinaria();
 
-        //BusquedaBinaria bBinaria = new BusquedaBinaria();
+        bBinaria.sortByAge(personas);
+        System.out.println("\nOrden por edad");
+        for (Persona persona : personas) {
+            System.out.println(persona + ", ");
+        }
 
-        // bBinaria.sortByName(products);
-        // for (Product product : products) {
-        //     System.out.println(product + ", ");
-        // }
+        System.out.println("Ingrese la edad que desea buscar: ");
+        edadBusca = entrada.nextInt();
 
-        // int res = bBinaria.findByName(products, "Laptop");
-        // if (res >= 0){
-        //     System.out.println("Encontrado en la posicion = " + res);
-        // } else {
-        //     System.out.println("No se encontro");
-        // }
+        int posicion = bBinaria.findByAge(personas, edadBusca);
+
+        if (posicion != -1) {
+            System.out.println("\nLa persona con la edad " + edadBusca + " es " + personas.get(posicion).getNombre());
+        } else {
+            System.out.println("\nPersona no encontrada");
+        }
 
         entrada.close();
 
