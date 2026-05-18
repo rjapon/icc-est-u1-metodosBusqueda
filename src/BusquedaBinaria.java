@@ -20,7 +20,7 @@ public class BusquedaBinaria {
 
             // Si voy a la der. o iz.
 
-            if (products[central].getNombre().compareTo(nombre) > 0){
+            if (products[central].getNombre().compareTo(nombre) < 0){
                 bajo = central + 1;
             } else {
                 alto = central -1;

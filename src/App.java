@@ -1,31 +1,55 @@
-import Models.Product;
+import Models.Persona;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        
-        Product[] products = {
-            new Product("Laptop", 20),
-            new Product("Smartphone", 25),
-            new Product("Tablet", 10),
-            new Product("Monitor", 5),
-            new Product("Keyboard", 15),
-        };
 
-        BusquedaBinaria bBinaria = new BusquedaBinaria();
+        Scanner entrada = new
+        ArrayList<Persona> personas = new ArrayList<>();        
+        int cantidad; 
 
-        bBinaria.sortByName(products);
-        for (Product product : products) {
-            System.out.println(product + ", ");
+        do{
+            System.out.println("Ingrese la cantidad de personas: ");
+            cantidad = entrada.nextInt();
+
+            if (cantidad <= 0) {
+                System.out.println("La cantidad debe ser mayor a cero");
+            }
+
+        }while(cantidad<=0);
+
+        for(int i = 0; i < cantidad; i++){
+            System.out.println("Persona "+ (i + 1));
+
+            System.out.println("Ingrese el Nombre ");
+            String nombre = entrada.next();
+
+            System.out.println("Ingres la edad ");
+            int edad = entrada.nextInt();
+
+            Persona persona = new Persona(nombre, edad);
+
+            personas.add(persona);
         }
 
-        int res = bBinaria.findByName(products, "Laptop");
-        if (res >= 0){
-            System.out.println("Entre en la posicion = " + res);
-        } else {
-            System.out.println("No se encontro");
-        }
 
 
+        //BusquedaBinaria bBinaria = new BusquedaBinaria();
+
+        // bBinaria.sortByName(products);
+        // for (Product product : products) {
+        //     System.out.println(product + ", ");
+        // }
+
+        // int res = bBinaria.findByName(products, "Laptop");
+        // if (res >= 0){
+        //     System.out.println("Encontrado en la posicion = " + res);
+        // } else {
+        //     System.out.println("No se encontro");
+        // }
+
+        entrada.close();
 
     }
 }
