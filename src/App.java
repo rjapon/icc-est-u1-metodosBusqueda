@@ -21,7 +21,7 @@ public class App {
         } while (cantidad <= 0);
 
         for (int i = 0; i < cantidad; i++) {
-            System.out.println("Persona " + (i + 1));
+            System.out.println("\nPersona " + (i + 1));
 
             System.out.println("Ingrese el nombre: ");
             String nombre = entrada.next();
@@ -37,7 +37,6 @@ public class App {
                 }
             } while (edad <= 0);
 
-            System.out.println("\nLista sin ordenar");
             Persona persona = new Persona(nombre, edad);
             personas.add(persona);
         }
